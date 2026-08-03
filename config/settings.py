@@ -35,7 +35,7 @@ DEBUG = env("DEBUG")
 SECRET_KEY = env("SECRET_KEY")
 
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['https://livre-aqui.onrender.com']
 
 
 # Application definition
