@@ -1,0 +1,44 @@
+<section id="ebook-section">
+
+    <div class="d-flex gap-3 overflow-auto pb-3">
+
+        {% for ebook in ebooks %}
+
+        <a href="{% url 'ebook:ebook' ebook.id %}"
+            class="card bg-black border-secondary text-decoration-none text-light flex-shrink-0" style="width: 220px;">
+
+            <img src="{{ ebook.image_url }}" class="card-img-top" alt="Capa do livro {{ ebook.title }}">
+
+            <div class="card-body">
+
+                <h3 class="h6 mb-0">
+                    {{ ebook.title }}
+                </h3>
+
+            </div>
+
+        </a>
+
+        {% endfor %}
+
+    </div>
+
+    <div class="d-flex justify-content-between mt-3">
+
+        {% if ebooks.has_previous %}
+        <button hx-get="?ebook_page={{ ebooks.previous_page_number }}" hx-target="#ebook-section" hx-swap="outerHTML"
+            class="btn btn-outline-warning">
+            &laquo; Anteriores
+        </button>
+        {% endif %}
+
+        {% if ebooks.has_next %}
+        <button hx-get="?ebook_page={{ ebooks.next_page_number }}" hx-target="#ebook-section" hx-swap="outerHTML"
+            class="btn btn-outline-warning ms-auto">
+            Próximos &raquo;
+        </button>
+        {% endif %}
+
+    </div>
+
+</section>

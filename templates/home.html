@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %} | Lançamentos{% endblock %}
+
+{% block main %}
+
+<h1 class="display-5 fw-bold border-bottom border-secondary pb-3 mb-5">
+    Lançamentos
+</h1>
+
+<section class="mb-5">
+
+    <h2 class="text-warning mb-4">
+        Filmes
+    </h2>
+
+    {% include 'partials/movie_list.html' %}
+
+</section>
+
+
+<section class="mb-5">
+
+    <h2 class="text-warning mb-4">
+        Livros
+    </h2>
+
+    {% include 'partials/ebook_list.html' %}
+
+</section>
+
+{% endblock %}

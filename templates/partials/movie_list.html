@@ -1,0 +1,44 @@
+<section id="movie-section">
+
+    <div class="d-flex gap-3 overflow-auto pb-3">
+
+        {% for movie in movies %}
+
+        <a href="{% url 'movie:movie' movie.id %}"
+            class="card bg-black border-secondary text-decoration-none text-light flex-shrink-0" style="width: 220px;">
+
+            <img src="{{ movie.image_url }}" class="card-img-top" alt="Capa do filme {{ movie.title }}">
+
+            <div class="card-body">
+
+                <h3 class="h6 mb-0">
+                    {{ movie.title }}
+                </h3>
+
+            </div>
+
+        </a>
+
+        {% endfor %}
+
+    </div>
+
+    <div class="d-flex justify-content-between mt-3">
+
+        {% if movies.has_previous %}
+        <button hx-get="?movie_page={{ movies.previous_page_number }}" hx-target="#movie-section" hx-swap="outerHTML"
+            class="btn btn-outline-warning">
+            &laquo; Anteriores
+        </button>
+        {% endif %}
+
+        {% if movies.has_next %}
+        <button hx-get="?movie_page={{ movies.next_page_number }}" hx-target="#movie-section" hx-swap="outerHTML"
+            class="btn btn-outline-warning ms-auto">
+            Próximos &raquo;
+        </button>
+        {% endif %}
+
+    </div>
+
+</section>

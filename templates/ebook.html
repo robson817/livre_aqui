@@ -1,0 +1,185 @@
+{% extends 'base.html' %}
+
+{% block title %} | {{ ebook.title }}{% endblock %}
+
+{% block main %}
+
+<article>
+
+    <header class="border-bottom border-secondary pb-4 mb-5">
+
+        <p class="text-warning text-uppercase fw-semibold mb-2">
+            Livro
+        </p>
+
+        <h1 class="display-5 fw-bold mb-2">
+            {{ ebook.title }}
+        </h1>
+
+        {% if ebook.original_title %}
+        <p class="fs-5 text-secondary mb-0">
+            Título original: {{ ebook.original_title }}
+        </p>
+        {% endif %}
+
+    </header>
+
+
+    <div class="row g-5">
+
+        <div class="col-md-5 col-lg-4">
+
+            <img src="{{ ebook.image_url }}" class="img-fluid rounded border border-secondary shadow"
+                alt="Capa do livro {{ ebook.title }}">
+
+            <div class="d-grid gap-3 mt-4">
+
+                {% if ebook.magnetic_link %}
+                <a href="{{ ebook.magnetic_link }}" class="btn btn-warning btn-lg fw-semibold">
+                    Baixar por torrent
+                </a>
+                {% endif %}
+
+            </div>
+
+        </div>
+
+
+        <div class="col-md-7 col-lg-8">
+
+            <section class="mb-5">
+
+                <h2 class="h3 text-warning mb-3">
+                    Sinopse
+                </h2>
+
+                {% if ebook.synopsis %}
+
+                <p class="fs-5 lh-lg">
+                    {{ ebook.synopsis }}
+                </p>
+
+                {% else %}
+
+                <p class="text-secondary">
+                    Nenhuma sinopse disponível.
+                </p>
+
+                {% endif %}
+
+            </section>
+
+
+            <section>
+
+                <h2 class="h3 text-warning mb-4">
+                    Informações
+                </h2>
+
+                <div class="card bg-black border-secondary text-light">
+
+                    <div class="card-body p-0">
+
+                        <dl class="mb-0">
+
+                            <div class="row g-0 border-bottom border-secondary p-3">
+
+                                <dt class="col-sm-4 text-secondary">
+                                    Gênero
+                                </dt>
+
+                                <dd class="col-sm-8 mb-0">
+
+                                    {% for genre in ebook.genres.all %}
+                                    {{ genre }}{% if not forloop.last %}, {% endif %}
+                                    {% empty %}
+                                    <span class="text-secondary">
+                                        Não informado
+                                    </span>
+                                    {% endfor %}
+
+                                </dd>
+
+                            </div>
+
+
+                            <div class="row g-0 border-bottom border-secondary p-3">
+
+                                <dt class="col-sm-4 text-secondary">
+                                    Autor
+                                </dt>
+
+                                <dd class="col-sm-8 mb-0">
+
+                                    {% for author in ebook.authors.all %}
+                                    {{ author }}{% if not forloop.last %}, {% endif %}
+                                    {% empty %}
+                                    <span class="text-secondary">
+                                        Não informado
+                                    </span>
+                                    {% endfor %}
+
+                                </dd>
+
+                            </div>
+
+
+                            <div class="row g-0 border-bottom border-secondary p-3">
+
+                                <dt class="col-sm-4 text-secondary">
+                                    Idioma
+                                </dt>
+
+                                <dd class="col-sm-8 mb-0">
+                                    {{ ebook.language|default:"Não informado" }}
+                                </dd>
+
+                            </div>
+
+
+                            <div class="row g-0 border-bottom border-secondary p-3">
+
+                                <dt class="col-sm-4 text-secondary">
+                                    Páginas
+                                </dt>
+
+                                <dd class="col-sm-8 mb-0">
+                                    {{ ebook.pages_number|default:"Não informado" }}
+                                </dd>
+
+                            </div>
+
+
+                            <div class="row g-0 p-3">
+
+                                <dt class="col-sm-4 text-secondary">
+                                    Lançamento
+                                </dt>
+
+                                <dd class="col-sm-8 mb-0">
+
+                                    {% if ebook.release_date %}
+                                    {{ ebook.release_date }}
+                                    {% else %}
+                                    Não informado
+                                    {% endif %}
+
+                                </dd>
+
+                            </div>
+
+                        </dl>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+        </div>
+
+    </div>
+
+</article>
+
+{% endblock %}
